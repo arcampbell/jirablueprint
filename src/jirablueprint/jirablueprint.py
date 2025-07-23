@@ -182,7 +182,7 @@ class JiraBlueprint:
                 del finalfields[sprintfield]
 
                 def map_sprint(item):
-                    sprintdict = self.get_sprint_dict(item["board"])[item["id"]].name
+                    sprintdict = self.get_sprint_dict(item["board"])
                     return sprintdict[item["id"]].name
 
                 sprintinfo = ",".join(map(map_sprint, addsprints))
@@ -217,6 +217,6 @@ class JiraBlueprint:
             if "children" in issuemeta:
                 self.console.indent()
                 self.process_issues(
-                    issuemeta["children"], args, issue.key if issue else None, dry
+                    issuemeta["children"], args, issue.key if issue else None, assignee, dry
                 )
                 self.console.dedent()
